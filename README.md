@@ -1,1 +1,3 @@
-# job-posting-api
+# Job Posting API
+
+Express, mongoose, bcryptjs
