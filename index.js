@@ -7,6 +7,7 @@ import connectDatabase from "./config/database.js";
 import jobPostingsRouter from "./routers/job-postings.js";
 import authRouter from "./routers/auth.js";
 import companysRouter from "./routers/companys.js";
+import applicationsRouter from "./routers/applications.js";
 
 const app = express();
 connectDatabase();
@@ -21,6 +22,7 @@ const PORT = process.env.PORT || 3000;
 app.use("/job-postings", jobPostingsRouter);
 app.use("/auth", authRouter);
 app.use("/companys", companysRouter);
+app.use("/applications", applicationsRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

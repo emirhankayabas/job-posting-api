@@ -6,6 +6,10 @@ const CompanySchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user_email: {
+      type: String,
+      required: true,
+    },
     company_name: {
       type: String,
       required: true,

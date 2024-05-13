@@ -79,9 +79,41 @@ const auth = {
         return res.status(400).json({ message: "Google Auth hatalı." });
       }
 
-      return res.status(200).json({ message: "Google Auth başarılı.", data });
+      const { email, given_name, family_name } = data;
+      const existingUser = await Auth.findOne({ email });
+
+      if (existingUser) {
+        return res.status(201).json({
+          status: "OK",
+          user: {
+            user_id: existingUser._id,
+            user_name: existingUser.user_name,
+            user_surname: existingUser.user_surname,
+            user_email: existingUser.user_email,
+            employer_id: existingUser.employer_id,
+          },
+        });
+      } else {
+        const createdUser = await Auth.create({
+          user_name: given_name,
+          user_surname: family_name,
+          user_email: email,
+          user_password: "default",
+        });
+
+        return res.status(201).json({
+          status: "OK",
+          user: {
+            user_id: createdUser._id,
+            user_name: createdUser.user_name,
+            user_surname: createdUser.user_surname,
+            user_email: createdUser.user_email,
+            employer_id: createdUser.employer_id,
+          },
+        });
+      }
     } catch (error) {
-      return res.status(500).json({ message: "Bir hata oluştu." });
+      return res.status(500).json({ message: "Bir hata oluştu.", error });
     }
   },
 

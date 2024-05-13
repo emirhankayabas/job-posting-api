@@ -14,6 +14,10 @@ const jobPostingsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    position_types: {
+      type: String,
+      required: true,
+    },
     position_salary: {
       type: Number,
     },
@@ -21,10 +25,25 @@ const jobPostingsSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    company_name: {
+      type: String,
+      required: true,
+    },
     company_id: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: true,
       ref: "companys",
+    },
+    applications: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "applications",
+      },
+    ],
+    status: {
+      type: String,
+      enum: ["active", "pending", "passive", "closed"],
+      default: "pending",
     },
   },
   {

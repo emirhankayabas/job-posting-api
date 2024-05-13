@@ -30,6 +30,17 @@ const AuthSchema = new mongoose.Schema(
       ref: "companys",
       default: null,
     },
+    applications: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "applications",
+      },
+    ],
+    status: {
+      type: String,
+      enum: ["active", "passive"],
+      default: "active",
+    },
   },
   {
     timestamps: true,
